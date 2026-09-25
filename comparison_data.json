@@ -1,0 +1,56 @@
+{
+  "existing_systems": [
+    {
+      "name": "Hong Kong Observatory",
+      "approach": "Automated QA flags + email alerts",
+      "gap": "Rule-based only; can miss new or subtle error types"
+    },
+    {
+      "name": "China (MDC method)",
+      "approach": "Cross-checks AWS data against radar",
+      "gap": "Needs radar coverage - expensive, patchy in India"
+    },
+    {
+      "name": "China (EOF method)",
+      "approach": "Self-referential spatial pattern check",
+      "gap": "Misses errors that look locally \"normal\""
+    },
+    {
+      "name": "Belgium (rule-based QC)",
+      "approach": "Range, spatial, and internal consistency checks",
+      "gap": "Fixed rules, can't learn new fault patterns"
+    },
+    {
+      "name": "DeepQC (LSTM)",
+      "approach": "Deep learning, 95.6% anomaly recall in published results",
+      "gap": "Needs large labeled datasets per station"
+    }
+  ],
+  "our_differentiators": [
+    {
+      "title": "Silent-station detection with predictive maintenance",
+      "detail": "Flags a dead station within minutes and predicts failure from health-score trends - directly targets the Gurugram 2018 incident where a 20-25 day outage caused a missed 128mm rainfall event."
+    },
+    {
+      "title": "Tampering detection with an honest fallback",
+      "detail": "Neighbor-station comparison catches insurance-fraud-style tampering (the documented Maharashtra case); falls back to a station's own history when no neighbors are available."
+    },
+    {
+      "title": "Explainable, multi-layer fusion",
+      "detail": "Combines rules, physics checks, spatial comparison, and ML into one attribution with a transparent confidence score - not a black box."
+    },
+    {
+      "title": "Role-based routing matching real IMD structure",
+      "detail": "Notification routing mirrors actual IMD organizational roles (DDG, Regional Meteorological Centre officers, Instrumentation Division, Forecasting Office) rather than generic admin/user labels."
+    },
+    {
+      "title": "Tested on both synthetic and real data",
+      "detail": "Synthetic mode proves detection accuracy against known faults; real mode (Open-Meteo) proves real-world stability; hybrid mode combines both for the strongest available test."
+    }
+  ],
+  "honest_limitations": [
+    "Precision cannot be honestly computed on real-world data without real IMD ground-truth fault records - only recall against our own synthetic faults is reported.",
+    "No live radar/satellite integration built in; Open-Meteo's data already blends satellite and ground sources, documented as the reasoning for not duplicating this.",
+    "Full production hardening (server redundancy, encrypted database, audit logging, legal/DPDP Act compliance review) is future-deployment scope, not claimed as done."
+  ]
+}
